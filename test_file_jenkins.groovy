@@ -34,7 +34,8 @@ pipeline {
                         sh "mkdir ${version}/${schema}"
                         sh "mv ${package_source_dir}/* ${version}/${schema}/"
 
-			def  scripts = sh (script: "find ${version} -type f -printf \"%f\\n\"", returnStdout: true).trim()
+			def  scripts = findFiles(glob: "${version}/**/*")
+				//sh (script: "find ${version} -type f -printf \"%f\\n\"", returnStdout: true).trim()
 			def json = [name: version, 
 				    operation: "create", 
 				    type: "regular", 
@@ -45,8 +46,6 @@ pipeline {
 			    writeJSON(file: 'message1.json', json: json)
 		    
                         sh "echo scripts list: ${scripts}"
-                        def manifestOutput = createPackageManifest(version, scripts)
-                        sh "manifest ooutput: ${manifestOutput}"
                         sh "curl"
 	                    
                         
