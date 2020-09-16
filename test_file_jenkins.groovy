@@ -4,6 +4,7 @@ import java.io.*
 import java.nio.file.*
 import org.json.*
 import groovyx.net.http.*
+//Plugin required: Pipeline Utility Steps	
 	
 @NonCPS
 def createPackageManifest(String name, List<String> scripts) {
@@ -17,6 +18,8 @@ def createPackageManifest(String name, List<String> scripts) {
 def String autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
 def String schema = "schema_name"
+
+def String proxyPath="http://localhost:9014"
 
 pipeline {
     agent any
@@ -34,7 +37,8 @@ pipeline {
                         sh "mkdir ${version}/${schema}"
                         sh "mv ${package_source_dir}/* ${version}/${schema}/"
 
-			def  scripts = findFiles(glob: "${version}/**/*")
+			def scripts_list = findFiles(glob: "${version}/**/*")
+			def scripts<<scripts_list.name
 				//sh (script: "find ${version} -type f -printf \"%f\\n\"", returnStdout: true).trim()
 			def json = [name: version, 
 				    operation: "create", 
@@ -43,10 +47,11 @@ pipeline {
 				    closed: false, 
 				    tags: [], 
 				    scripts: scripts]
-			    writeJSON(file: 'message1.json', json: json)
-		    
-                        sh "echo scripts list: ${scripts}"
-                        sh "curl"
+			writeJSON(file: "${version}/package.json", json: json)
+			def zipFileName = "${version}.dbmpackage.zip"
+			zip(zipFile:"${zipFileName}", dir: "${version}")
+
+			execCommand("curl -F \"packageFile=@${zipFileName}\" -X POST ${proxyPath}")
 	                    
                         
                     }
