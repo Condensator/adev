@@ -4,7 +4,7 @@ def String autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
 
 def String schema = "PRX_RS"
-def String packageLoaderPath="http://localhost:9014/Projects/12/packages"
+def String packageLoaderPath="http://192.168.99.1:4567/Projects/5/packages"
 
 pipeline {
     agent any
