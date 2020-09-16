@@ -38,8 +38,11 @@ pipeline {
                         sh "mv ${package_source_dir}/* ${version}/${schema}/"
 
 			def scripts_list = findFiles(glob: "${version}/**/*")
-			def scripts = []
-			    scripts<<scripts_list.getName()
+			    def scripts = []
+			for (def file : scripts_list) {
+ 				scripts<<file.getName()
+			}
+
 				//sh (script: "find ${version} -type f -printf \"%f\\n\"", returnStdout: true).trim()
 			def json = [name: version, 
 				    operation: "create", 
