@@ -39,7 +39,7 @@ pipeline {
 
 			def scripts_list = findFiles(glob: "${version}/**/*")
 			def scripts = []
-			    scripts<<scripts_list.name
+			    scripts<<scripts_list.getName()
 				//sh (script: "find ${version} -type f -printf \"%f\\n\"", returnStdout: true).trim()
 			def json = [name: version, 
 				    operation: "create", 
