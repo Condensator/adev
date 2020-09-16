@@ -1,19 +1,4 @@
-import groovy.json.*
-import groovy.io.FileType	
-import java.io.*
-import java.nio.file.*
-import org.json.*
-import groovyx.net.http.*
 //Plugin required: Pipeline Utility Steps	
-	
-@NonCPS
-def createPackageManifest(String name, List<String> scripts) {
-	def manifest = new JsonBuilder()
-	manifest name: name, operation: "create", type: "regular", enabled: true, closed: false, tags: [], scripts: scripts
-	echo "Generating manifest:"
-	def manifestOutput = manifest.toPrettyString()
-	return manifestOutput
-}
 
 def String autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
