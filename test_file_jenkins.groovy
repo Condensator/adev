@@ -1,5 +1,7 @@
-def String script_dir = "scripts"
+def String package_source_dir = "scripts"
+def String autopackage_dir = "package"
 def String varsion = "V.import.${env.BUILD_NUMBER}"
+def String schema = "schema_name"
 
 pipeline {
     agent any
@@ -7,9 +9,16 @@ pipeline {
         stage('Example') {
             steps{
                 script{
-                    sh "chmod -R 777 ${script_dir}"
-                    dir (script_dir) {
-                        sh "find . -type f -printf \"%T@ %p\\n\" | sort -nr | cut -d\\  -f2-"
+                    sh "printenv"
+                    sh "mkdir ${autopackage_dir}"
+                    sh "chmod -R 777 ${autopackage_dir}"
+                    dir (autopackage_dir) {
+                        //sh "find . -type f -printf \"%T@ %p\\n\" | sort -nr | cut -d\\  -f2-"
+                        sh "echo version is ${version}"
+                        sh "mkdir ${version}"
+                        sh "mkdir ${version}/${schema}"
+                        //sh "mv ${package_source_dir}/* ${version}/${schema}/"
+                        
                     }
                 }
             }
