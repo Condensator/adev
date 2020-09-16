@@ -11,7 +11,6 @@ pipeline {
             steps{
                 script{
                     sh "printenv"
-                    sh "mkdir ${autopackage_dir}"
                     sh "chmod -R 777 ${autopackage_dir}"
                     dir (autopackage_dir) {
                         //sh "find . -type f -printf \"%T@ %p\\n\" | sort -nr | cut -d\\  -f2-"
