@@ -26,14 +26,8 @@ pipeline {
                         sh "mkdir ${version}"
                         sh "mkdir ${version}/${schema}"
                         sh "mv ${package_source_dir}/* ${version}/${schema}/"
-                        
-			sh "ls"
-			    
-                        def scripts = []
-			    def dir = new File("${env.WORKSPACE}/${autopackage_dir}/${version}")
-			dir.eachFileRecurse (FileType.FILES) { file ->
-  				list << file
-			}
+
+			def  scripts = sh (script: "find ${version} -type f -printf \"%f\\n\"", returnStdout: true).trim()   
 		    
                         sh "echo scripts list: ${scripts}"
                         def manifest = new JsonBuilder()
