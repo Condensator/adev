@@ -39,7 +39,7 @@ pipeline {
 			zip(zipFile:"${zipFileName}", dir: "${version}")
 			sh "curl -F \"packageFile=@${zipFileName}\" -X POST ${packageLoaderPath}"
 	                
-			sh "java -jar package command"
+			//sh "java -jar package command"
                         
                     }
                 }
