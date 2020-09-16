@@ -55,7 +55,7 @@ pipeline {
 			def zipFileName = "${version}.dbmpackage.zip"
 			zip(zipFile:"${zipFileName}", dir: "${version}")
 
-			execCommand("curl -F \"packageFile=@${zipFileName}\" -X POST ${proxyPath}")
+			sh "curl -F \"packageFile=@${zipFileName}\" -X POST ${proxyPath}"
 	                    
                         
                     }
