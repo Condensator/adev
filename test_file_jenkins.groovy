@@ -4,7 +4,7 @@ def String autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
 def String schema = "schema_name"
 
-def String proxyPath="http://localhost:9014"
+def String packageLoaderPath="http://localhost:9014"
 
 pipeline {
     agent any
@@ -40,7 +40,7 @@ pipeline {
 			def zipFileName = "${version}.dbmpackage.zip"
 			zip(zipFile:"${zipFileName}", dir: "${version}")
 
-			sh "curl -F \"packageFile=@${zipFileName}\" -X POST ${proxyPath}"
+			sh "curl -F \"packageFile=@${zipFileName}\" -X POST ${packageLoaderPath}"
 	                    
                         
                     }
