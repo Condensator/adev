@@ -1,5 +1,5 @@
 
-def String package_source_dir = "scripts"
+def String package_source_dir = "${env.WORKSPACE}/scripts"
 def String autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
 def String schema = "schema_name"
@@ -17,7 +17,17 @@ pipeline {
                         sh "echo version is ${version}"
                         sh "mkdir ${version}"
                         sh "mkdir ${version}/${schema}"
-                        //sh "mv ${package_source_dir}/* ${version}/${schema}/"
+                        sh "mv ${package_source_dir}/* ${version}/${schema}/"
+                        
+                        def scripts = findFiles(glob: ${version}/**/*.sql)
+                        sh "echo scripts list: ${scripts}"
+                        def manifest = new JsonBuilder()
+	                    manifest name: name, operation: "create", type: "regular", enabled: true, closed: false, tags: [], scripts: scripts
+	                    echo "Generating manifest:"
+	                    def manifestOutput = manifest.toPrettyString()
+                        sh "manifest ooutput: ${manifestOutput}"
+                        sh "curl"
+	                    
                         
                     }
                 }
