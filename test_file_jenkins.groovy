@@ -35,7 +35,7 @@ pipeline {
 						    
                         sh "echo scripts list: ${scripts}"
                         def manifest = new JsonBuilder()
-	                    manifest name: name, operation: "create", type: "regular", enabled: true, closed: false, tags: [], scripts: scripts
+	                    manifest operation: "create", type: "regular", enabled: true, closed: false, tags: [], scripts: scripts
 	                    echo "Generating manifest:"
 	                    def manifestOutput = manifest.toPrettyString()
                         sh "manifest ooutput: ${manifestOutput}"
