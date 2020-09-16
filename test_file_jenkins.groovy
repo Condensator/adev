@@ -5,7 +5,7 @@ import org.json.*
 import groovyx.net.http.*
 	
 
-def String package_source_dir = "${env.WORKSPACE}/scripts"
+
 def String autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
 def String schema = "schema_name"
@@ -16,6 +16,7 @@ pipeline {
         stage('Example') {
             steps{
                 script{
+		    def String package_source_dir = "${env.WORKSPACE}/scripts"
                     sh "printenv"
                     sh "chmod -R 777 ${autopackage_dir}"
                     dir (autopackage_dir) {
