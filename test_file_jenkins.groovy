@@ -27,13 +27,14 @@ pipeline {
                         sh "mkdir ${version}/${schema}"
                         sh "mv ${package_source_dir}/* ${version}/${schema}/"
                         
+			sh "ls"
+			    
                         def scripts = []
 			def dir = new File("${env.WORKSPACE}/${version}")
 			dir.eachFileRecurse (FileType.FILES) { file ->
   				list << file
 			}
-			sh "ls"
-						    
+		    
                         sh "echo scripts list: ${scripts}"
                         def manifest = new JsonBuilder()
 	                    manifest operation: "create", type: "regular", enabled: true, closed: false, tags: [], scripts: scripts
