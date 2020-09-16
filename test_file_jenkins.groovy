@@ -26,7 +26,7 @@ pipeline {
                         sh "mkdir ${version}/${schema}"
                         sh "mv ${package_source_dir}/* ${version}/${schema}/"
                         
-                        def scripts = findFiles(glob: ${version}/**/*.sql)
+                        def scripts = findFiles(glob: "${version}/**/*.sql")
                         sh "echo scripts list: ${scripts}"
                         def manifest = new JsonBuilder()
 	                    manifest name: name, operation: "create", type: "regular", enabled: true, closed: false, tags: [], scripts: scripts
