@@ -1,3 +1,9 @@
+import groovy.json.*
+import java.io.*
+import java.nio.file.*
+import org.json.*
+import groovyx.net.http.*
+	
 
 def String package_source_dir = "${env.WORKSPACE}/scripts"
 def String autopackage_dir = "package"
