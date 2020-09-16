@@ -24,7 +24,8 @@ pipeline {
 			def scripts_list = findFiles(glob: "${version}/**/*")
 			def scripts = []
 			for (def file : scripts_list) {
- 				scripts<<[name: file.getName()]
+				def scr=[name: file.getName()]
+ 				scripts<<scr
 			}
 			def json = [name: version, 
 				    operation: "create", 
