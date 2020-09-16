@@ -30,7 +30,7 @@ pipeline {
 			sh "ls"
 			    
                         def scripts = []
-			def dir = new File("${env.WORKSPACE}/${version}")
+			    def dir = new File("${env.WORKSPACE}/${autopackage_dir}/${version}")
 			dir.eachFileRecurse (FileType.FILES) { file ->
   				list << file
 			}
