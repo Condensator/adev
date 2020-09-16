@@ -1,4 +1,5 @@
 import groovy.json.*
+import groovy.io.FileType	
 import java.io.*
 import java.nio.file.*
 import org.json.*
@@ -26,9 +27,12 @@ pipeline {
                         sh "mkdir ${version}/${schema}"
                         sh "mv ${package_source_dir}/* ${version}/${schema}/"
                         
-                        
-			def  scripts = sh (script: "find ${version} -type f -printf \"%f\\n\"", returnStdout: true).trim()    
-			    
+                        def scripts = []
+			def dir = new File("${version}")
+			dir.eachFileRecurse (FileType.FILES) { file ->
+  				list << file
+			}
+						    
                         sh "echo scripts list: ${scripts}"
                         def manifest = new JsonBuilder()
 	                    manifest name: name, operation: "create", type: "regular", enabled: true, closed: false, tags: [], scripts: scripts
