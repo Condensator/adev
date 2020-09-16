@@ -1,3 +1,6 @@
+import jenkins.model.*
+jenkins = Jenkins.instance
+
 def String package_source_dir = "scripts"
 def String autopackage_dir = "package"
 def String varsion = "V.import.${env.BUILD_NUMBER}"
