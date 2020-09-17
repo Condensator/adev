@@ -120,7 +120,7 @@ pipeline {
 
               dir (autopackage_dir) {
 
-                sh "java -jar ${automation_jar_path} -Upgrade -ProjectName ${project_name} -EnvName ${rs_environment_name} -PackageName ${version} -Server ${dbm_address} -AuthType ${auth_type} -UserName ${user_name} -Password ${auth_token}"
+                sh "java -jar ${automation_jar_path} -Upgrade -ProjectName ${project_name} -EnvName \"${rs_environment_name}\" -PackageName ${version} -Server ${dbm_address} -AuthType ${auth_type} -UserName ${user_name} -Password ${auth_token}"
 
               }
 
