@@ -12,7 +12,7 @@ def autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
 
 def String schema = "liq2"
-def String packageLoaderPath="http://192.168.99.1:4567/Projects/5/packages"
+def String packageLoaderPath="http://192.168.99.1:4567/Projects/178/packages"
 
  
 
