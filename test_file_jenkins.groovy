@@ -7,7 +7,7 @@ def auth_type = "DBmaestroAccount"
 def user_name = "admin@dbmaestro.com"
 def auth_token = "123456"
 def dbm_address = "192.168.99.1:8017"
-def package_source_dir = "scripts"
+def package_source_dir = "../scripts"
 def autopackage_dir = "package"
 def String version = "V.import.${env.BUILD_NUMBER}"
 
